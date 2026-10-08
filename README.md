@@ -1,28 +1,17 @@
-# gray-uv
+<p align="center">
+  <img src="assets/gray-logo.svg" alt="gray" width="96">
+  <img src="assets/uv.svg" alt="uv" width="96">
+</p>
+<h1 align="center">gray-uv</h1>
+<p align="center">Rewrite Python packaging commands to their uv equivalents.</p>
+<p align="center">
+  <a href="https://github.com/vstaln/gray-uv/blob/main/LICENSE"><img alt="MIT License" src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+  <img alt="gray plugin" src="https://img.shields.io/badge/gray-plugin-7aa2f7.svg">
+  <img alt="rust" src="https://img.shields.io/badge/built%20with-rust-orange.svg">
+</p>
 
-Rewrite Python packaging commands to their uv equivalents.
-
-A sidecar plugin for [gray](https://github.com/vstaln/gray). Port-by-spec of
-mitsupi's `uv.ts`/`intercepted-commands/` (proprietary — reimplemented, no
-code copied): where the original blocked pip/poetry, this rewrites.
-
-`tool/before` on `bash` inspects the first shell segment of `args.command`
-and answers `{"decision":"modify"}`:
-
-| typed                  | runs                    |
-|------------------------|-------------------------|
-| `pip install X`        | `uv pip install X`      |
-| `pip3 …`               | `uv pip …`              |
-| `poetry add X`         | `uv add X`              |
-| `poetry install`       | `uv sync`               |
-| `poetry remove X`      | `uv remove X`           |
-| `poetry run C`         | `uv run C`              |
-| `python -m venv …`     | `uv venv …`             |
-
-Only the first segment (before `|` `;` `&` or a newline) is examined, and
-only when the tool word is its first token — `echo x | pip install y` and
-`sudo pip install y` pass through untouched. Everything after the first
-separator is preserved verbatim. Fail open: any rewrite problem → allow.
+Rewrite Python packaging commands to their uv equivalents — where a guard
+would block `pip`/`poetry`, this rewrites it to `uv` instead.
 
 ## Commands
 
@@ -50,3 +39,7 @@ gray account publish    # check → build → release → publish to the gray re
 
 Bump `version` in `Cargo.toml` before each `publish`; the registry refuses to
 republish a version.
+
+---
+Part of the [gray](https://github.com/vstaln/gray) plugin ecosystem —
+the open-source AI agent harness. <https://gray.alignment.id>
