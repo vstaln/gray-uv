@@ -33,6 +33,7 @@ fn manifest() -> Value {
         "tools": [],
         "description": "rewrite python commands to run under uv",
         "commands": ["/uv"],
+        "command_descriptions": {"/uv": "toggle rewriting pip and poetry to uv"},
         "hooks": ["tool/before"],
     })
 }
